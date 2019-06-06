@@ -1,0 +1,22 @@
+{
+  "name": "svrx-plugin-weinre",
+  "version": "0.0.1",
+  "description": "weinre plugin for server-x",
+  "main": "index.js",
+  "scripts": {},
+  "engines": {
+    "svrx": "~0.0.2"
+  },
+  "keywords": [
+    "svrx",
+    "svrx-plugin"
+  ],
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "express": "3.18.1",
+    "nopt": "3.0.x",
+    "portfinder": "^1.0.17",
+    "underscore": "1.7.x"
+  }
+}
