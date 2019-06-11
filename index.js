@@ -54,7 +54,7 @@ module.exports = {
       };
 
       const stopWeinre = await weinre.run(opts);
-
+      
       return () => {
         stopWeinre();
       };
