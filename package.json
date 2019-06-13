@@ -14,11 +14,7 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "errorhandler": "1.5.1",
-    "express": "4.17.1",
-    "nopt": "3.0.x",
-    "portfinder": "1.0.17",
-    "serve-favicon": "2.5.0",
-    "underscore": "1.7.x"
+    "weinre": "^2.0.0-pre-I0Z7U9OV",
+    "portfinder": "1.0.17"
   }
 }

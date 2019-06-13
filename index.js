@@ -1,7 +1,7 @@
 const libPath = require('path');
 const libFs = require('fs');
 const portfinder = require('portfinder');
-const weinre = require('./weinre/lib/weinre');
+const weinre = require('weinre');
 
 function isHtml(url) {
   return /\.(html|htm)($|\?)/.test(url);
@@ -53,11 +53,7 @@ module.exports = {
         deathTimeout: config.get('deathTimeout')
       };
 
-      const stopWeinre = await weinre.run(opts);
-      
-      return () => {
-        stopWeinre();
-      };
+      weinre.run(opts);
     },
     async onRoute(ctx, next, { config }) {
       if (isHtml(ctx.path)) {
