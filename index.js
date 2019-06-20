@@ -42,7 +42,7 @@ module.exports = {
   },
   hooks: {
     async onCreate({ config }) {
-      const [ vaildPort ] = await ffp(config.get('$.port'));
+      const [ vaildPort ] = await ffp(config.get('$.port') + 1);
       const httpPort = config.get('httpPort') || vaildPort;
       config.set('httpPort', httpPort);
 
