@@ -1,16 +1,5 @@
-const libPath = require('path');
-const libFs = require('fs');
-const portfinder = require('portfinder');
+const ffp = require('find-free-port');
 const weinre = require('weinre');
-
-function isHtml(url) {
-  return /\.(html|htm)($|\?)/.test(url);
-}
-
-function appendScript(body, scriptUrl) {
-  const replaceScript = [`</body>`, `<script async src="${scriptUrl}"></script></body>`];
-  return body.replace(...replaceScript);
-}
 
 module.exports = {
   configSchema: {
@@ -38,9 +27,22 @@ module.exports = {
       default: 15
     }
   },
+  assets: {
+    script: config => {
+      const boundHost = config.get('boundHost');
+      const httpPort = config.get('httpPort');
+      return `
+        (function () {
+          var script = document.createElement('script');
+          script.src = 'http://${boundHost}:${httpPort}/target/target-script-min.js#anonymous';
+          document.body.appendChild(script);
+        })();
+      `;
+    }
+  },
   hooks: {
     async onCreate({ config }) {
-      const vaildPort = await portfinder.getPortPromise();
+      const [ vaildPort ] = await ffp(config.get('$.port'));
       const httpPort = config.get('httpPort') || vaildPort;
       config.set('httpPort', httpPort);
 
@@ -53,20 +55,16 @@ module.exports = {
         deathTimeout: config.get('deathTimeout')
       };
 
-      weinre.run(opts);
-    },
-    async onRoute(ctx, next, { config }) {
-      if (isHtml(ctx.path)) {
-        const rootPath = config.get('$.root');
-        const boundHost = config.get('boundHost');
-        const httpPort = config.get('httpPort');
-        const filePath = libPath.join(rootPath, ctx.path);
-        const fileContent = libFs.readFileSync(filePath, 'utf8');
-        const scriptUrl = `http://${boundHost}:${httpPort}/target/target-script-min.js#anonymous`;
-        ctx.body = appendScript(fileContent, scriptUrl);
-      }
+      const server = weinre.run(opts);
+      await new Promise((resolve) => {
+        server.on('listening', () => {
+          resolve();
+        });
+      });
 
-      await next();
+      return () => {
+        server.close();
+      }
     }
   }
 };
