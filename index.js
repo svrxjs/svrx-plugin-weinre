@@ -1,5 +1,5 @@
 const ffp = require('find-free-port');
-const weinre = require('weinre');
+const weinre = require('./weinre/lib/weinre');
 
 module.exports = {
   configSchema: {
