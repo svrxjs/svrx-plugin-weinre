@@ -149,46 +149,46 @@ utils.fileExistsSync = function(name) {
   return path.existsSync(name);
 };
 
-Error.prepareStackTrace = function(error, structuredStackTrace) {
-  var callSite, file, func, funcName, line, longestFile, longestLine, result, _i, _j, _len, _len1;
-  result = [];
-  result.push("---------------------------------------------------------");
-  result.push("error: " + error);
-  result.push("---------------------------------------------------------");
-  result.push("stack: ");
-  longestFile = 0;
-  longestLine = 0;
-  for (_i = 0, _len = structuredStackTrace.length; _i < _len; _i++) {
-    callSite = structuredStackTrace[_i];
-    file = callSite.getFileName();
-    line = callSite.getLineNumber();
-    file = path.basename(file);
-    line = "" + line;
-    if (file.length > longestFile) {
-      longestFile = file.length;
-    }
-    if (line.length > longestLine) {
-      longestLine = line.length;
-    }
-  }
-  for (_j = 0, _len1 = structuredStackTrace.length; _j < _len1; _j++) {
-    callSite = structuredStackTrace[_j];
-    func = callSite.getFunction();
-    file = callSite.getFileName();
-    line = callSite.getLineNumber();
-    file = path.basename(file);
-    line = "" + line;
-    file = utils.alignRight(file, longestFile);
-    line = utils.alignLeft(line, longestLine);
-    funcName = func.displayName || func.name || callSite.getFunctionName();
-    callSite.getMethodName();
-    '???';
-    if (funcName === "Module._compile") {
-      result.pop();
-      result.pop();
-      break;
-    }
-    result.push("   " + file + ":" + line + " - " + funcName + "()");
-  }
-  return result.join("\n");
-};
+// Error.prepareStackTrace = function(error, structuredStackTrace) {
+//   var callSite, file, func, funcName, line, longestFile, longestLine, result, _i, _j, _len, _len1;
+//   result = [];
+//   result.push("---------------------------------------------------------");
+//   result.push("error: " + error);
+//   result.push("---------------------------------------------------------");
+//   result.push("stack: ");
+//   longestFile = 0;
+//   longestLine = 0;
+//   for (_i = 0, _len = structuredStackTrace.length; _i < _len; _i++) {
+//     callSite = structuredStackTrace[_i];
+//     file = callSite.getFileName();
+//     line = callSite.getLineNumber();
+//     file = path.basename(file);
+//     line = "" + line;
+//     if (file.length > longestFile) {
+//       longestFile = file.length;
+//     }
+//     if (line.length > longestLine) {
+//       longestLine = line.length;
+//     }
+//   }
+//   for (_j = 0, _len1 = structuredStackTrace.length; _j < _len1; _j++) {
+//     callSite = structuredStackTrace[_j];
+//     func = callSite.getFunction();
+//     file = callSite.getFileName();
+//     line = callSite.getLineNumber();
+//     file = path.basename(file);
+//     line = "" + line;
+//     file = utils.alignRight(file, longestFile);
+//     line = utils.alignLeft(line, longestLine);
+//     funcName = func.displayName || func.name || callSite.getFunctionName();
+//     callSite.getMethodName();
+//     '???';
+//     if (funcName === "Module._compile") {
+//       result.pop();
+//       result.pop();
+//       break;
+//     }
+//     result.push("   " + file + ":" + line + " - " + funcName + "()");
+//   }
+//   return result.join("\n");
+// };

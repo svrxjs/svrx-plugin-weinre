@@ -33,7 +33,7 @@
   },
   "bundleDependencies": false,
   "dependencies": {
-    "express": "2.5.x",
+    "express": "3.5.x",
     "nopt": "3.0.x",
     "underscore": "1.7.x"
   },
