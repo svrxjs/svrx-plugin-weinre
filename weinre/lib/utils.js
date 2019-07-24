@@ -26,6 +26,13 @@ utils.trim = function(string) {
   return string.replace(/(^\s+)|(\s+$)/g, '');
 };
 
+utils.notify = function(message) {
+  var date, time;
+  date = new Date();
+  time = date.toISOString();
+  return console.log("" + time + " " + Program + ": " + message);
+};
+
 utils.log = log = function(message) {
   var date, time;
   date = new Date();

@@ -1,6 +1,6 @@
 {
   "name": "svrx-plugin-weinre",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "description": "weinre plugin for server-x",
   "main": "index.js",
   "scripts": {},
@@ -14,6 +14,12 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "find-free-port": "^2.0.0"
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "find-free-port": "^2.0.0",
+    "nopt": "3.0.x",
+    "serve-favicon": "^2.5.0",
+    "serve-static": "^1.14.1",
+    "underscore": "1.7.x"
   }
 }

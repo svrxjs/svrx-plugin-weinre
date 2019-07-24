@@ -1,5 +1,21 @@
 const ffp = require('find-free-port');
 const weinre = require('./weinre/lib/weinre');
+const utils = require('./weinre/lib/utils');
+const os = require('os');
+
+function getExternalIp() {
+  const ifaces = os.networkInterfaces();
+  const ips = [];
+
+  Object.keys(ifaces).forEach((dev) => {
+    ifaces[dev].forEach((details) => {
+      if (details.family === 'IPv4' && details.address !== '127.0.0.1') {
+        ips.push(details.address);
+      }
+    });
+  });
+  return ips.length > 0 ? ips[0] : 'localhost';
+}
 
 module.exports = {
   configSchema: {
@@ -8,7 +24,7 @@ module.exports = {
     },
     boundHost: {
       type: 'string',
-      default: 'localhost'
+      default: getExternalIp()
     },
     verbose: {
       type: 'boolean',
@@ -41,7 +57,16 @@ module.exports = {
     }
   },
   hooks: {
-    async onCreate({ config }) {
+    async onCreate({ config, logger }) {
+
+      utils.log = (message) => {
+        logger.debug(message);
+      }
+
+      utils.notify = (message) => {
+        logger.notify(message);
+      }
+
       const [ vaildPort ] = await ffp(config.get('$.port') + 1);
       const httpPort = config.get('httpPort') || vaildPort;
       config.set('httpPort', httpPort);
