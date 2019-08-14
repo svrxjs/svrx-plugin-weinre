@@ -15,11 +15,11 @@
   "devDependencies": {},
   "dependencies": {
     "errorhandler": "^1.5.1",
-    "express": "^4.17.1",
+    "express": "~4.17.1",
     "find-free-port": "^2.0.0",
-    "nopt": "3.0.x",
+    "nopt": "~4.0.1",
     "serve-favicon": "^2.5.0",
     "serve-static": "^1.14.1",
-    "underscore": "1.7.x"
+    "underscore": "~1.9.1"
   }
 }
