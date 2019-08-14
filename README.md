@@ -1,5 +1,7 @@
 # svrx-plugin-weinre
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/x-orpheus/svrx-plugin-weinre.svg)](https://greenkeeper.io/)
+
 The portal plugin for weinre
 
 ```bash
