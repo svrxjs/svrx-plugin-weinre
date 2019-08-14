@@ -33,14 +33,14 @@
   },
   "bundleDependencies": false,
   "dependencies": {
-    "express": "3.5.x",
-    "nopt": "3.0.x",
-    "underscore": "1.7.x"
+    "express": "~4.17.1",
+    "nopt": "~4.0.1",
+    "underscore": "~1.9.1"
   },
   "deprecated": false,
   "description": "WEb INspector REmote",
   "devDependencies": {
-    "coffee-script": "1.8.x"
+    "coffee-script": "~1.12.7"
   },
   "directories": {
     "lib": "./lib"
