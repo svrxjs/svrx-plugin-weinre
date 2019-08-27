@@ -1,6 +1,6 @@
 {
   "name": "svrx-plugin-weinre",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "weinre plugin for server-x",
   "main": "index.js",
   "scripts": {},

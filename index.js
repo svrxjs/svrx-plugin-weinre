@@ -57,7 +57,7 @@ module.exports = {
     }
   },
   hooks: {
-    async onCreate({ config, logger }) {
+    async onCreate({ config, logger, events }) {
 
       utils.log = (message) => {
         logger.debug(message);
@@ -67,29 +67,22 @@ module.exports = {
         logger.notify(message);
       }
 
-      const [ vaildPort ] = await ffp(config.get('$.port') + 1);
-      const httpPort = config.get('httpPort') || vaildPort;
-      config.set('httpPort', httpPort);
+      events.on('ready', async () => {
+        const [ vaildPort ] = await ffp(config.get('$.port'));
+        const httpPort = config.get('httpPort') || vaildPort;
+        config.set('httpPort', httpPort);
 
-      const opts = {
-        httpPort,
-        boundHost: config.get('boundHost'),
-        verbose: config.get('verbose'),
-        debug: config.get('debug'),
-        readTimeout: config.get('readTimeout'),
-        deathTimeout: config.get('deathTimeout')
-      };
+        const opts = {
+          httpPort,
+          boundHost: config.get('boundHost'),
+          verbose: config.get('verbose'),
+          debug: config.get('debug'),
+          readTimeout: config.get('readTimeout'),
+          deathTimeout: config.get('deathTimeout')
+        };
 
-      const server = weinre.run(opts);
-      await new Promise((resolve) => {
-        server.on('listening', () => {
-          resolve();
-        });
+        weinre.run(opts);
       });
-
-      return () => {
-        server.close();
-      }
     }
   }
 };
