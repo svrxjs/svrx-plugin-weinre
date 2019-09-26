@@ -1,18 +1,22 @@
 {
   "name": "svrx-plugin-weinre",
   "version": "0.0.10",
-  "description": "weinre plugin for server-x",
+  "description": "The svrx plugin for weinre",
   "main": "index.js",
-  "scripts": {},
-  "engines": {
-    "svrx": "~0.0.2"
-  },
   "keywords": [
     "svrx",
-    "svrx-plugin"
+    "svrx-plugin",
+    "weinre"
   ],
-  "license": "MIT",
-  "devDependencies": {},
+  "engines": {
+    "svrx": "^1.0.0"
+  },
+  "author": "svrxjs",
+  "scripts": {
+    "start": "node ./example/start.js",
+    "lint": "eslint index.js",
+    "lint:fix": "eslint index.js --fix"
+  },
   "dependencies": {
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
@@ -21,5 +25,21 @@
     "serve-favicon": "^2.5.0",
     "serve-static": "^1.14.1",
     "underscore": "1.7.x"
-  }
+  },
+  "devDependencies": {
+    "@svrx/eslint-config": "^1.0.0",
+    "eslint": "^6.2.0",
+    "global-modules": "^2.0.0",
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix"
+  },
+  "license": "MIT"
 }
